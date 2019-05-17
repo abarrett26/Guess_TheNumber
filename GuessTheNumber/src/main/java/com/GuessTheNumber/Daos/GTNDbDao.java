@@ -96,10 +96,10 @@ public class GTNDbDao implements GTNDao {
        int activeRoundId = addRounds(activeGame);
        activeRound.setRoundId(activeRoundId);
  
-       final String LOG_GUESS = "INSERT INTO rounds(roundId, gameId, guessNumber, exact, partial, time)"
-               + "VALUES(?,?,?,?,?,?);";
+       final String MAKE_GUESS = "INSERT INTO rounds(roundId, gameId, guessNumber, roundNumber, exact, partial, time)"
+               + "VALUES(?,?,?,?,?,?,?);";
        try {
-           jdbc.update(LOG_GUESS, activeRound.getRoundId(), activeRound.getGameId(), activeRound.getGuessNumber(), activeRound.getExact(), activeRound.getPartial(), activeRound.getTime());
+           jdbc.update(MAKE_GUESS, activeRound.getRoundId(), activeRound.getGameId(), activeRound.getGuessNumber(), activeRound.getRoundNumber(), activeRound.getExact(), activeRound.getPartial(), activeRound.getTime());
            activeRound.setTime(LocalDateTime.now());
        } catch (DataAccessException ex) {
            throw new PersistenceException("Unable to insert data from database");
